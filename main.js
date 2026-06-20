@@ -43,3 +43,44 @@ if (stage && phone && !reduceMotion && finePointer) {
     phone.style.removeProperty("--ry");
   });
 }
+
+// Hero phone image slider
+const track = document.querySelector(".phone-track");
+const dotsWrap = document.querySelector(".phone-dots");
+const visual = document.querySelector(".hero-visual");
+
+if (track && dotsWrap) {
+  const slides = Array.from(track.children);
+  const noAuto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let i = 0;
+  let timer = null;
+
+  const dots = slides.map((_, n) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "phone-dot" + (n === 0 ? " is-active" : "");
+    b.setAttribute("aria-label", `Show screen ${n + 1} of ${slides.length}`);
+    b.addEventListener("click", () => { go(n); restart(); });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(${-i * 100}%)`;
+    dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+  }
+  function start() { if (!noAuto && slides.length > 1) timer = setInterval(() => go(i + 1), 3600); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function restart() { stop(); start(); }
+
+  if (visual) {
+    visual.addEventListener("pointerenter", stop);
+    visual.addEventListener("pointerleave", start);
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop(); else start();
+  });
+
+  start();
+}

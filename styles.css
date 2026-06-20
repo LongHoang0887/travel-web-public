@@ -398,6 +398,73 @@ a:hover { color: var(--accent-dark); }
   padding: 11px; border-radius: 12px;
 }
 
+/* Phone image slider */
+.phone-slider { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.phone-track {
+  display: flex; flex: 1; min-height: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.phone-slide { flex: 0 0 100%; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+
+.phone-dots { display: flex; justify-content: center; gap: 7px; padding-top: 14px; }
+.phone-dot {
+  width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(62, 127, 224, 0.28);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.phone-dot.is-active { width: 20px; border-radius: 999px; background: var(--accent); }
+
+.slide-head { display: flex; align-items: center; gap: 10px; }
+.slide-back { font-size: 1.3rem; line-height: 1; color: var(--accent); font-weight: 700; }
+.slide-route { font-weight: 700; color: var(--text); }
+.slide-route b { color: var(--text); }
+.slide-tag {
+  margin-left: auto; font-size: 0.72rem; font-weight: 700; color: var(--accent);
+  background: rgba(62, 127, 224, 0.12); padding: 3px 10px; border-radius: 999px;
+}
+
+.opt {
+  background: var(--surface); border-radius: var(--radius-sm); padding: 12px 14px;
+  box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 4px;
+}
+.opt-row { display: flex; align-items: center; justify-content: space-between; }
+.opt-air { font-weight: 700; color: var(--text); font-size: 0.92rem; }
+.opt-sub { font-size: 0.8rem; color: var(--muted); }
+
+.stay-photo {
+  position: relative; height: 132px; border-radius: var(--radius-sm); overflow: hidden;
+  background: repeating-linear-gradient(45deg, #d8e6fb, #d8e6fb 10px, #cfe0f8 10px, #cfe0f8 20px);
+  display: grid; place-items: center;
+}
+.ph-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem;
+  color: var(--accent-dark); background: rgba(255, 255, 255, 0.72); padding: 3px 8px; border-radius: 6px;
+}
+.app-amen { display: flex; gap: 6px; flex-wrap: wrap; }
+.app-amen span {
+  font-size: 0.72rem; font-weight: 600; color: var(--muted);
+  background: var(--surface); border: 1px solid rgba(62, 127, 224, 0.15);
+  padding: 4px 10px; border-radius: 999px;
+}
+.stay-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
+.stay-night { font-weight: 500; color: var(--muted); font-size: 0.82rem; }
+.mini-btn {
+  font-size: 0.8rem; font-weight: 700; color: #fff; background: var(--accent);
+  padding: 8px 18px; border-radius: 999px;
+}
+
+.phone-slide--confirm { align-items: center; justify-content: center; text-align: center; }
+.confirm-check {
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 1.6rem; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--success-from), var(--success-to));
+  box-shadow: 0 10px 24px rgba(29, 158, 117, 0.35);
+}
+.confirm-title { font-weight: 800; font-size: 1.1rem; color: var(--text); }
+.confirm-ref { font-size: 0.82rem; color: var(--muted); }
+.phone-slide--confirm .app-card { width: 100%; text-align: left; }
+.phone-slide--confirm .app-confirm { width: 100%; margin-top: 8px; }
+
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-visual { order: -1; }
