@@ -16,3 +16,30 @@ if (toggle && nav) {
     }
   });
 }
+
+// Mouse-driven 3D tilt on the hero phone mockup
+const stage = document.querySelector(".hero-visual");
+const phone = document.querySelector(".phone");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+if (stage && phone && !reduceMotion && finePointer) {
+  const MAX = 12; // degrees of tilt
+  let frame = null;
+
+  stage.addEventListener("pointermove", (e) => {
+    const r = stage.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;  // -0.5 .. 0.5
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    if (frame) cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => {
+      phone.style.setProperty("--ry", `${px * MAX * 2 - 14}deg`);
+      phone.style.setProperty("--rx", `${-py * MAX + 6}deg`);
+    });
+  });
+
+  stage.addEventListener("pointerleave", () => {
+    phone.style.removeProperty("--rx");
+    phone.style.removeProperty("--ry");
+  });
+}

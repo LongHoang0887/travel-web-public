@@ -184,14 +184,21 @@ a:hover { color: var(--accent-dark); }
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
+.feature-grid { perspective: 1200px; }
 .feature-card {
   background: var(--bg);
   border: 1px solid rgba(62, 127, 224, 0.10);
   border-radius: var(--radius);
   padding: 26px 24px;
-  transition: transform 0.14s ease, box-shadow 0.14s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
 }
-.feature-card:hover { transform: translateY(-3px); box-shadow: var(--card-shadow); }
+.feature-card:hover {
+  transform: translateY(-6px) rotateX(5deg) rotateY(-5deg);
+  box-shadow: 0 24px 44px rgba(62, 127, 224, 0.22);
+}
+.feature-card:hover .feature-icon { transform: translateZ(22px); }
+.feature-icon { transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
 .feature-icon {
   font-size: 1.6rem; display: grid; place-items: center;
   width: 46px; height: 46px; border-radius: 12px;
@@ -322,7 +329,7 @@ a:hover { color: var(--accent-dark); }
 .hero-note { font-size: 0.9rem; color: rgba(255, 255, 255, 0.78); margin: 0; }
 
 /* Phone mockup (pure CSS) */
-.hero-visual { display: flex; justify-content: center; }
+.hero-visual { display: flex; justify-content: center; perspective: 1100px; }
 .phone {
   position: relative;
   width: 280px;
@@ -330,7 +337,21 @@ a:hover { color: var(--accent-dark); }
   border-radius: 40px;
   padding: 12px;
   box-shadow: 0 30px 60px rgba(12, 35, 64, 0.35), inset 0 0 0 2px rgba(255,255,255,0.06);
+  transform-style: preserve-3d;
+  /* Gentle resting 3D tilt; JS overrides via --rx/--ry on pointer move */
+  transform:
+    rotateX(var(--rx, 6deg))
+    rotateY(var(--ry, -14deg))
+    rotateZ(1deg);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  will-change: transform;
 }
+.hero-visual:hover .phone {
+  box-shadow: 0 44px 80px rgba(12, 35, 64, 0.45), inset 0 0 0 2px rgba(255,255,255,0.08);
+}
+/* Lift inner content forward in 3D space for depth */
+.phone .phone-screen { transform: translateZ(28px); }
+.phone .app-card, .phone .app-confirm { transform: translateZ(18px); }
 .phone-notch {
   position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
   width: 120px; height: 22px; background: #0C2340; border-radius: 0 0 16px 16px; z-index: 2;
@@ -398,4 +419,14 @@ a:hover { color: var(--accent-dark); }
   .nav-cta { display: inline-block; margin-top: 8px; }
   .section { padding-block: 56px; }
   .hero { padding-block: 56px 64px; }
+}
+
+/* Respect users who prefer reduced motion: flatten the 3D effects */
+@media (prefers-reduced-motion: reduce) {
+  .phone {
+    transform: rotateY(-6deg) !important;
+    transition: none;
+  }
+  .feature-card:hover { transform: translateY(-4px); }
+  .feature-card:hover .feature-icon { transform: none; }
 }
