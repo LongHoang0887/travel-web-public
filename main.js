@@ -44,6 +44,21 @@ if (stage && phone && !reduceMotion && finePointer) {
   });
 }
 
+// Contact form → open the visitor's email app with a prefilled message
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
+    const val = (id) => document.getElementById(id).value.trim();
+    const name = val("cf-name");
+    const subject = `Odyssey enquiry from ${name}`;
+    const body = `Name: ${name}\nEmail: ${val("cf-email")}\n\n${val("cf-message")}`;
+    window.location.href =
+      `mailto:bookings@odysseytrip.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
+
 // Hero phone image slider
 const track = document.querySelector(".phone-track");
 const dotsWrap = document.querySelector(".phone-dots");
@@ -51,7 +66,7 @@ const visual = document.querySelector(".hero-visual");
 
 if (track && dotsWrap) {
   const slides = Array.from(track.children);
-  const noAuto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const noAuto = reduceMotion;
   let i = 0;
   let timer = null;
 
@@ -70,17 +85,30 @@ if (track && dotsWrap) {
     track.style.transform = `translateX(${-i * 100}%)`;
     dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
   }
-  function start() { if (!noAuto && slides.length > 1) timer = setInterval(() => go(i + 1), 3600); }
+  function start() {
+    if (timer || noAuto || slides.length < 2) return;
+    timer = setInterval(() => go(i + 1), 3600);
+  }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function restart() { stop(); start(); }
 
   if (visual) {
     visual.addEventListener("pointerenter", stop);
     visual.addEventListener("pointerleave", start);
+    // Keyboard users: pause while a dot is focused
+    visual.addEventListener("focusin", stop);
+    visual.addEventListener("focusout", start);
   }
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop(); else start();
   });
+
+  // Pause when the hero scrolls out of view
+  if (visual && "IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) start(); else stop();
+    }).observe(visual);
+  }
 
   start();
 }

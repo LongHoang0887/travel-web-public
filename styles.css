@@ -26,6 +26,7 @@
   /* Layout */
   --container: 1120px;
   --gutter: 24px;
+  --section-y: 72px;       /* vertical rhythm between sections */
 
   /* Typography */
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -49,7 +50,7 @@ a:hover { color: var(--accent-dark); }
 
 /* Layout helpers */
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
-.section { padding-block: 72px; }
+.section { padding-block: var(--section-y); }
 
 /* Header / nav */
 .site-header {
@@ -79,7 +80,7 @@ a:hover { color: var(--accent-dark); }
   transform: translateY(-1px) rotate(-3deg);
   box-shadow: 0 10px 22px rgba(62, 127, 224, 0.45);
 }
-.site-nav { display: flex; gap: 28px; }
+.site-nav { display: flex; align-items: center; gap: 28px; }
 .site-nav a { color: var(--muted); font-weight: 600; font-size: 0.95rem; }
 .site-nav a:hover { color: var(--text); }
 .nav-cta {
@@ -121,6 +122,15 @@ a:hover { color: var(--accent-dark); }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
 .footer-nav a { color: var(--muted); font-weight: 600; }
 .footer-nav a:hover { color: var(--text); }
+.footer-qr {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); font-weight: 600; font-size: 0.8rem;
+}
+.footer-qr img {
+  padding: 7px; border-radius: 10px; background: var(--bg);
+  border: 1px solid rgba(62, 127, 224, 0.22);
+}
+.footer-qr:hover { color: var(--text); }
 .footer-legal {
   padding-top: 18px; border-top: 1px solid rgba(62, 127, 224, 0.10);
   font-size: 0.85rem;
@@ -173,7 +183,7 @@ a:hover { color: var(--accent-dark); }
 @media (max-width: 860px) {
   .flow { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .flow { grid-template-columns: 1fr; }
 }
 
@@ -183,8 +193,8 @@ a:hover { color: var(--accent-dark); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
+  perspective: 1200px;
 }
-.feature-grid { perspective: 1200px; }
 .feature-card {
   background: var(--bg);
   border: 1px solid rgba(62, 127, 224, 0.10);
@@ -198,15 +208,15 @@ a:hover { color: var(--accent-dark); }
   box-shadow: 0 24px 44px rgba(62, 127, 224, 0.22);
 }
 .feature-card:hover .feature-icon { transform: translateZ(22px); }
-.feature-icon { transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
 .feature-icon {
   font-size: 1.6rem; display: grid; place-items: center;
   width: 46px; height: 46px; border-radius: 12px;
   background: rgba(62, 127, 224, 0.10); margin-bottom: 14px;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .feature-card h3 { font-size: 1.08rem; font-weight: 700; margin: 0 0 8px; }
 .feature-card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
-.feature-soon { border-style: dashed; }
+.feature-soon { border-style: dashed; grid-column: 1 / -1; }
 .pill {
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: var(--accent); background: rgba(62, 127, 224, 0.12);
@@ -222,7 +232,7 @@ a:hover { color: var(--accent-dark); }
 
 /* ---------- App surfaces (tabs) ---------- */
 .tabs {
-  list-style: none; margin: 0 auto; padding: 0; max-width: 760px;
+  list-style: none; margin: 0; padding: 0;
   display: grid; gap: 14px;
 }
 .tab-row {
@@ -273,6 +283,37 @@ a:hover { color: var(--accent-dark); }
 @media (max-width: 860px) {
   .tech-grid { grid-template-columns: 1fr; gap: 24px; }
 }
+
+/* ---------- Contact form ---------- */
+.contact-form {
+  max-width: 560px; margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid rgba(62, 127, 224, 0.10);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: grid; gap: 16px;
+}
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.contact-form input,
+.contact-form textarea {
+  font: inherit; color: var(--text);
+  background: var(--bg);
+  border: 1px solid rgba(62, 127, 224, 0.20);
+  border-radius: var(--radius-sm);
+  padding: 11px 13px;
+}
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible { border-color: var(--accent); }
+.btn-submit {
+  justify-self: start;
+  background: var(--accent); color: #fff;
+  box-shadow: 0 10px 24px rgba(62, 127, 224, 0.28);
+}
+.btn-submit:hover { background: var(--accent-dark); color: #fff; }
+.contact-note { margin: 0; font-size: 0.85rem; color: var(--muted); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -333,10 +374,14 @@ a:hover { color: var(--accent-dark); }
 .phone {
   position: relative;
   width: 280px;
-  background: #0C2340;
-  border-radius: 40px;
-  padding: 12px;
-  box-shadow: 0 30px 60px rgba(12, 35, 64, 0.35), inset 0 0 0 2px rgba(255,255,255,0.06);
+  /* Titanium-style frame edge (iPhone 17 Pro) */
+  background: linear-gradient(145deg, #2a3a4d, #0C2340 45%, #060f1c);
+  border-radius: 52px;
+  padding: 10px;
+  box-shadow:
+    0 30px 60px rgba(12, 35, 64, 0.35),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.10),   /* polished rim highlight */
+    inset 0 0 0 6px #0a1626;                       /* matte inner bezel */
   transform-style: preserve-3d;
   /* Gentle resting 3D tilt; JS overrides via --rx/--ry on pointer move */
   transform:
@@ -352,14 +397,35 @@ a:hover { color: var(--accent-dark); }
 /* Lift inner content forward in 3D space for depth */
 .phone .phone-screen { transform: translateZ(28px); }
 .phone .app-card, .phone .app-confirm { transform: translateZ(18px); }
-.phone-notch {
-  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-  width: 120px; height: 22px; background: #0C2340; border-radius: 0 0 16px 16px; z-index: 2;
+/* Side buttons (iPhone 17 Pro) — Action + volume left, side + Camera Control right */
+.pbtn {
+  position: absolute; width: 3px; z-index: 1;
+  background: linear-gradient(180deg, #46586d, #16202e);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.pbtn-action { left: -2px; top: 116px; height: 26px; border-radius: 3px 0 0 3px; }
+.pbtn-volup  { left: -2px; top: 158px; height: 36px; border-radius: 3px 0 0 3px; }
+.pbtn-voldn  { left: -2px; top: 200px; height: 36px; border-radius: 3px 0 0 3px; }
+.pbtn-side   { right: -2px; top: 150px; height: 58px; border-radius: 0 3px 3px 0; }
+.pbtn-cam    { right: -2px; top: 222px; height: 30px; border-radius: 0 3px 3px 0; }
+
+/* Dynamic Island — floating pill (iPhone 17 Pro) */
+.phone-island {
+  position: absolute; top: 22px; left: 50%; transform: translateX(-50%) translateZ(30px);
+  width: 92px; height: 26px; background: #05080f; border-radius: 999px; z-index: 3;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+/* Camera dot inside the island */
+.phone-island::after {
+  content: ""; position: absolute; top: 50%; right: 9px; transform: translateY(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #1b3a5c, #05080f 70%);
 }
 .phone-screen {
   background: var(--bg);
-  border-radius: 30px;
-  padding: 34px 16px 18px;
+  border: 4px solid #05080f;   /* thin black display bezel (iPhone 17) */
+  border-radius: 42px;
+  padding: 54px 14px 16px;
   display: flex; flex-direction: column; gap: 12px;
   min-height: 520px;
 }
@@ -433,13 +499,8 @@ a:hover { color: var(--accent-dark); }
 
 .stay-photo {
   position: relative; height: 132px; border-radius: var(--radius-sm); overflow: hidden;
-  background: repeating-linear-gradient(45deg, #d8e6fb, #d8e6fb 10px, #cfe0f8 10px, #cfe0f8 20px);
-  display: grid; place-items: center;
 }
-.ph-label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem;
-  color: var(--accent-dark); background: rgba(255, 255, 255, 0.72); padding: 3px 8px; border-radius: 6px;
-}
+.stay-photo img { width: 100%; height: 100%; object-fit: cover; }
 .app-amen { display: flex; gap: 6px; flex-wrap: wrap; }
 .app-amen span {
   font-size: 0.72rem; font-weight: 600; color: var(--muted);
@@ -484,7 +545,7 @@ a:hover { color: var(--accent-dark); }
   .site-nav.is-open { max-height: 360px; padding: 8px var(--gutter) 16px; }
   .site-nav a { padding: 12px 0; width: 100%; }
   .nav-cta { display: inline-block; margin-top: 8px; }
-  .section { padding-block: 56px; }
+  :root { --section-y: 56px; }
   .hero { padding-block: 56px 64px; }
 }
 
