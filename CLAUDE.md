@@ -5,7 +5,7 @@ Guidance for Claude Code when working in this repository.
 ## What this is
 
 The marketing / pre-launch landing site for **Odyssey**, a SwiftUI iOS app for booking
-flights and hotels (search → book real Duffel orders → manage trips). The app itself
+flights and hotels (search → book real Amadeus orders → manage trips). The app itself
 lives in a separate repo (`travel-ios-app`). This repo is **only** the website.
 
 Plain static site — **no framework, no build step, no dependencies**. Open `index.html`
@@ -35,7 +35,7 @@ Live at **https://odysseytrip.org** via GitHub Pages.
 - **Content must stay faithful to the real app.** Features come from the app's
   `ROADMAP.md`; don't invent capabilities. Unshipped items (real payments, App Store
   availability) are marked "Coming", never presented as done.
-- **Honest status.** It's a working prototype on Duffel's *test* environment, wired for
+- **Honest status.** It's a working prototype on Amadeus's *test* environment, wired for
   TestFlight — not on the App Store. Keep copy consistent with that.
 - **Keep it dependency-free.** No frameworks, bundlers, or external CSS/JS. JS stays
   minimal and vanilla — small progressive enhancements only (see `main.js`), and the

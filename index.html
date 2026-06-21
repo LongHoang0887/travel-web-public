@@ -13,9 +13,57 @@
   <meta property="og:description" content="Search flights and stays, book real orders, and manage trips. Launching soon." />
   <meta property="og:url" content="https://odysseytrip.org/" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://odysseytrip.org/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Odyssey — book flights &amp; hotels, beautifully" />
+  <meta property="og:site_name" content="Odyssey" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Odyssey — Book flights &amp; hotels, beautifully" />
+  <meta name="twitter:description" content="Search flights and stays, book real orders, and manage trips. Launching soon." />
+  <meta name="twitter:image" content="https://odysseytrip.org/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="Odyssey — book flights &amp; hotels, beautifully" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <!-- Mark JS as available before first paint so scroll-reveal hides nothing when JS is off -->
   <script>document.documentElement.classList.add("js");</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://odysseytrip.org/#organization",
+        "name": "Odyssey",
+        "url": "https://odysseytrip.org/",
+        "logo": "https://odysseytrip.org/favicon.svg",
+        "sameAs": ["https://github.com/LongHoang0887/travel-web-public"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://odysseytrip.org/#website",
+        "url": "https://odysseytrip.org/",
+        "name": "Odyssey",
+        "description": "Odyssey is a travel app for booking flights and hotels — search, book real orders, and manage your trips. Launching soon.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://odysseytrip.org/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Odyssey",
+        "applicationCategory": "TravelApplication",
+        "operatingSystem": "iOS 17+",
+        "url": "https://odysseytrip.org/",
+        "description": "A SwiftUI iOS app to search flights and hotels, book real Amadeus orders, and manage trips — one-way, round-trip, or multi-city. A working prototype on Amadeus's test environment, wired for TestFlight.",
+        "inLanguage": ["en", "vi"],
+        "softwareVersion": "Prototype (TestFlight)",
+        "publisher": { "@id": "https://odysseytrip.org/#organization" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#top">Skip to content</a>
@@ -23,11 +71,11 @@
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Odyssey — home">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 16c5-9 15-9 20 0" />
-            <path d="M12 2l3 5-3 2-3-2 3-5z" fill="currentColor" stroke="none" />
-            <circle cx="2" cy="16" r="1.6" fill="currentColor" stroke="none" />
-            <circle cx="22" cy="16" r="1.6" fill="currentColor" stroke="none" />
+          <svg viewBox="-8 -8 96 96" width="32" height="32" fill="none" stroke-linecap="round">
+            <path d="M40 4 A36 36 0 0 1 76 40" stroke="#3E7FE0" stroke-width="9" />
+            <path d="M40 76 A36 36 0 0 1 4 40" stroke="#5BA8F5" stroke-width="9" />
+            <circle cx="40" cy="4" r="7.5" fill="#1D9E75" />
+            <circle cx="40" cy="76" r="7.5" fill="#EF9F27" />
           </svg>
         </span>
         <span class="brand-name">Odyssey</span>
@@ -61,7 +109,7 @@
             <a class="btn btn-primary" href="https://github.com/LongHoang0887/travel-web-public">View on GitHub</a>
             <a class="btn btn-ghost" href="#features">See features</a>
           </div>
-          <p class="hero-note">A working prototype on Duffel’s test environment — beta access coming.</p>
+          <p class="hero-note">A working prototype on Amadeus's test environment — beta access coming.</p>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
@@ -141,7 +189,7 @@
                   <div class="phone-slide phone-slide--confirm">
                     <div class="confirm-check">✓</div>
                     <div class="confirm-title">Order confirmed</div>
-                    <div class="confirm-ref">Ref · DUFFEL-7Q2K</div>
+                    <div class="confirm-ref">Ref · AMADEUS-7Q2K</div>
                     <div class="app-card">
                       <div class="app-route">
                         <span class="app-iata">HAN</span>
@@ -165,7 +213,6 @@
       <div class="container trust-inner">
         <span class="trust-label">Powered by</span>
         <ul class="trust-list">
-          <li>Duffel</li>
           <li>Amadeus</li>
           <li>Stripe <span class="pill">Coming</span></li>
         </ul>
@@ -192,7 +239,7 @@
             <span class="flow-num">3</span>
             <span class="flow-icon">🎫</span>
             <h3 class="flow-title">Book a real order</h3>
-            <p class="flow-text">Per-passenger checkout creates a real Duffel order and confirms your booking with a reference.</p>
+            <p class="flow-text">Per-passenger checkout creates a real Amadeus order and confirms your booking with a reference.</p>
           </li>
           <li class="flow-step reveal">
             <span class="flow-num">4</span>
@@ -211,7 +258,7 @@
           <article class="feature-card feature-card--lg reveal">
             <span class="feature-icon">✈️</span>
             <h3>Real flight &amp; hotel bookings</h3>
-            <p>Search creates live offers and checkout places a real Duffel order for both flights and stays.</p>
+            <p>Search creates live offers and checkout places a real Amadeus order for both flights and stays.</p>
           </article>
           <article class="feature-card reveal">
             <span class="feature-icon">🗺️</span>
@@ -256,7 +303,7 @@
           <article class="feature-card feature-soon reveal">
             <span class="feature-icon">💳</span>
             <h3>Real payments <span class="pill">Coming</span></h3>
-            <p>Card payments via Duffel Payments / Stripe are on the roadmap for the public release.</p>
+            <p>Card payments via Amadeus Payments / Stripe are on the roadmap for the public release.</p>
           </article>
         </div>
       </div>
@@ -323,7 +370,7 @@
             <h3 class="tech-h">Backend &amp; APIs</h3>
             <ul class="tech-list">
               <li>Express token-proxy keeps API tokens off-device</li>
-              <li>Duffel for flight &amp; hotel orders; Amadeus for search data</li>
+              <li>Amadeus for flight &amp; hotel orders; Amadeus for search data</li>
               <li>Postgres-backed accounts with rate-limited auth</li>
               <li>Privacy manifest declaring exactly what’s collected</li>
             </ul>
@@ -340,7 +387,7 @@
         </div>
 
         <div class="status-banner reveal">
-          <strong>Status:</strong> Odyssey is a working prototype running on Duffel’s
+          <strong>Status:</strong> Odyssey is a working prototype running on Amadeus's
           <em>test</em> environment — wired for TestFlight, not yet on the App Store.
           Real card payments are on the roadmap for the public release.
         </div>
@@ -375,11 +422,11 @@
       <div>
         <span class="brand">
           <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 16c5-9 15-9 20 0" />
-              <path d="M12 2l3 5-3 2-3-2 3-5z" fill="currentColor" stroke="none" />
-              <circle cx="2" cy="16" r="1.6" fill="currentColor" stroke="none" />
-              <circle cx="22" cy="16" r="1.6" fill="currentColor" stroke="none" />
+            <svg viewBox="-8 -8 96 96" width="32" height="32" fill="none" stroke-linecap="round">
+              <path d="M40 4 A36 36 0 0 1 76 40" stroke="#3E7FE0" stroke-width="9" />
+              <path d="M40 76 A36 36 0 0 1 4 40" stroke="#5BA8F5" stroke-width="9" />
+              <circle cx="40" cy="4" r="7.5" fill="#1D9E75" />
+              <circle cx="40" cy="76" r="7.5" fill="#EF9F27" />
             </svg>
           </span>
           <span class="brand-name">Odyssey</span>
