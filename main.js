@@ -112,3 +112,32 @@ if (track && dotsWrap) {
 
   start();
 }
+
+// Scroll reveal — fade + rise elements into view as they enter the viewport
+const revealEls = document.querySelectorAll(".reveal");
+if (revealEls.length) {
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach((el) => el.classList.add("is-in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    revealEls.forEach((el) => {
+      // Stagger siblings so rows/grids cascade in instead of snapping together
+      const siblings = Array.from(el.parentElement.children).filter((c) =>
+        c.classList.contains("reveal")
+      );
+      const idx = siblings.indexOf(el);
+      el.style.setProperty("--reveal-delay", `${Math.min(idx, 6) * 70}ms`);
+      io.observe(el);
+    });
+  }
+}
