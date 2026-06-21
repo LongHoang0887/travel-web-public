@@ -140,6 +140,13 @@ a:hover { color: var(--accent-dark); }
   border: 1px solid rgba(62, 127, 224, 0.22);
 }
 .footer-qr:hover { color: var(--text); }
+.footer-qr-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px;
+  background: linear-gradient(135deg, #5BA8F5, #3E7FE0 55%, #6FB0F0);
+  color: #fff; font-size: 0.8rem; font-weight: 700;
+  box-shadow: 0 4px 12px rgba(62, 127, 224, 0.35);
+}
 .footer-legal {
   padding-top: 18px; border-top: 1px solid rgba(62, 127, 224, 0.10);
   font-size: 0.85rem;
@@ -332,14 +339,20 @@ a:hover { color: var(--accent-dark); }
 }
 .contact-form textarea { resize: vertical; min-height: 120px; }
 .contact-form input:focus-visible,
-.contact-form textarea:focus-visible { border-color: var(--accent); }
+.contact-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(62, 127, 224, 0.20);
+}
 .btn-submit {
   justify-self: start;
+  border: none;
   background: var(--accent); color: #fff;
-  box-shadow: 0 10px 24px rgba(62, 127, 224, 0.28);
 }
 .btn-submit:hover { background: var(--accent-dark); color: #fff; }
 .contact-note { margin: 0; font-size: 0.85rem; color: var(--muted); }
+.contact-email { color: var(--accent); font-weight: 600; text-decoration: none; }
+.contact-email:hover { text-decoration: underline; }
 
 /* ---------- Trust strip ---------- */
 .trust {
